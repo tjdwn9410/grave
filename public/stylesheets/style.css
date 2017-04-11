@@ -1,0 +1,70 @@
+
+a {
+    color: #00B7FF;
+}
+body
+{
+}
+@font-face {
+    font-family: 'BMJUA';
+    src: url('/fonts/BMJUA_ttf.ttf');
+}
+
+div#head_content {
+    width: 100%;
+    text-align: center;
+}
+div#head_text
+{
+  font-family: 'BMJUA';
+  line-height: 1.5;
+}
+img#logo
+{
+  width:200px;
+  height: 200px;
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+div#main_content
+{
+  text-align: center;
+}
+div#line
+{
+  margin-left: 6vw;
+  width:88vw;
+  height:20px;
+  background-image:url('/images/dot_line.png');
+  background-repeat: repeat-x;
+}
+img.grave
+{
+  width:251px;
+  height:143px;
+}
+img.grave_line
+{
+  width:251px;
+  height:20px;
+}
+img.flower_icon
+{
+  width:34.3px;
+  height:25px;
+}
+img.comment_icon
+{
+  widht:25.6px;
+  height:25px;
+}
+img.share_icon
+{
+  width:27.9px;
+  height:25px;
+}
+div.icon
+{
+  text-align: right;
+  margin-right: 10px;
+}

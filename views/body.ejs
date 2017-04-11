@@ -1,0 +1,31 @@
+<div id="head_content">
+    <img id="logo" src="./images/logo.png" />
+    <div id="head_text">
+        <br/> I miss you<br /> 종료된 서비스의 온라인 공동묘지<br /><br /> 한 시대를 풍미했던 버디버디, 싸이월드 미니홈피 등 그 이외에 종료된 수많은 서비스들.<br /> 각자의 사정이나 이유는 다르지만 종료되었다는 사실은 분명하고 이 사실을 애석해 할 유저들이 많은 것 또한 분명하다.<br /> 그래서 이를 기억하는 사람들을 위해 프로그램들의 열린 추모 공간을 만들었다.<br />
+    </div>
+    <div id="line">
+    </div>
+</div>
+
+<div id="main_content">
+    <table id="graves" align="center">
+        <% var imgs = ["grave_animalfarm","grave_buddybuddy","grave_cyworld","grave_freechal","grave_grandchase","grave_metoday","grave_o2jam","grave_puppyred","grave_qplay"] %>
+            <% for(var i = 0 ; i < 3 ; i++) {%>
+                <tr id="g_rows<%= i %>">
+                    <% for(var j = 0 ; j < 3 ; j++) {%>
+                        <td id="g_cols<%= i %><%= j %>" width ="280px" height="300px">
+                            <% if (imgs.length > i*3+j) {%>
+                                <img class="grave" id="<%=imgs[i*3+j] %>" src="./images/<%=imgs[i*3+j] %>.png" />
+                                <img class="grave_line" src="./images/dot_line.png" />
+                                <div class="icon">
+                                  <img class="flower_icon" id="flower_<%= i %>_<%= j %>" src="./images/icon_flower.png" />
+                                  <img class="comment_icon" id="comment_<%= i %>_<%= j %>" src="./images/icon_comment.png" />
+                                  <img class="share_icon" id="share_<%= i %>_<%= j %>" src="./images/icon_share.png" />
+                                </div>
+                                <% } %>
+                        </td>
+                        <% } %>
+                </tr>
+                <% } %>
+    </table>
+</div>
