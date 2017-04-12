@@ -13,14 +13,14 @@
             <% for(var i = 0 ; i < 3 ; i++) {%>
                 <tr id="g_rows<%= i %>">
                     <% for(var j = 0 ; j < 3 ; j++) {%>
-                        <td id="g_cols<%= i %><%= j %>" width ="280px" height="300px">
+                        <td id="g_cols<%= i %><%= j %>" width="280px" height="300px">
                             <% if (imgs.length > i*3+j) {%>
                                 <img class="grave" id="<%=imgs[i*3+j] %>" src="./images/<%=imgs[i*3+j] %>.png" />
                                 <img class="grave_line" src="./images/dot_line.png" />
                                 <div class="icon">
-                                  <img class="flower_icon" id="flower_<%= i %>_<%= j %>" src="./images/icon_flower.png" />
-                                  <img class="comment_icon" id="comment_<%= i %>_<%= j %>" src="./images/icon_comment.png" />
-                                  <img class="share_icon" id="share_<%= i %>_<%= j %>" src="./images/icon_share.png" />
+                                    <img class="flower_icon" id="flower_<%= i %>_<%= j %>" src="./images/icon_flower.png" />
+                                    <img class="comment_icon" id="comment_<%= i %>_<%= j %>" src="./images/icon_comment.png" />
+                                    <img class="share_icon" id="share_<%= i %>_<%= j %>" src="./images/icon_share.png" />
                                 </div>
                                 <% } %>
                         </td>
@@ -28,4 +28,23 @@
                 </tr>
                 <% } %>
     </table>
+</div>
+
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview" style="width: 400px; height: 264px;" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
