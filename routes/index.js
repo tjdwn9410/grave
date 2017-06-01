@@ -17,24 +17,30 @@ var commentModel = mongoose.model("comment",commentSchema,'testCollection');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  commentModel.find({},function(err,docs)
-  {
-    console.log("HI");
-    console.log(docs);
-  });
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '공동묘지' });
 });
 
-router.post('/newcomment',function(req, res) {
-  /*var date = new Date(req.body.date);
-  var newTask = req.body.task;
-  var obj = {"date":date, "task":newTask, "done":false};
-   //mongoose
-  var task = new todo(obj);
-  task.save(function(err){
+router.post('/newcomment',function(req, res,next) {
+
+  var comment = req.body.comment;
+  var idx = req.body.index;
+
+  var obj = {"comment":comment, "index":idx};
+  var addcomment = new commentModel(obj);
+  addcomment.save(function(err){
     if(err) console.log(err);
-    res.redirect('/');
-  });*/
+    //res.redirect('/');
+  });
+  //res.json(obj);
+  res.send(addcomment);
 });
 
+router.post('/loadcomment',function(req, res,next) {
+
+  var idx = req.body.index;
+  commentModel.find({"index":idx},function(err,docs)
+  {
+    res.send(docs);
+  });
+});
 module.exports = router;

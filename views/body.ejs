@@ -21,8 +21,7 @@
                                     <img class="flower_icon" id="flower_<%= i %>_<%= j %>" src="./images/icon_flower.png" />
                                     <img class="comment_icon" id="comment_<%= i %>_<%= j %>" src="./images/icon_comment.png" />
                                     <img class="share_icon" id="share_<%= i %>_<%= j %>" src="./images/icon_share.png" />
-                                </div
-                                <% } %>
+                                </div <% } %>
                         </td>
                         <% } %>
                 </tr>
@@ -35,39 +34,39 @@
         <div class="modal-content">
             <div class="modal-body">
                 <table id="comment_table" color="RED" width="800px">
-                  <tr>
-                    <td colspan="3">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="" id="imagepreview">
-                    </td>
-                    <td>
-                      <div id="border_line">
+                    <tr>
+                        <td colspan="3">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="" id="imagepreview">
+                        </td>
+                        <td>
+                            <div id="border_line">
 
-                      </div>
-                    </td>
-                    <td >
-                      <div id="right_contents">
-                        <p id="grave_title">
-                        </p>
-                        <div id="grave_title_line">
-                        </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="right_contents">
+                                <p id="grave_title">
+                                </p>
+                                <div id="grave_title_line">
+                                </div>
 
-                        <div id="comment_list">
+                                <div id="comment_list">
 
-                        </div>
-                          <form method="post" action="/newcomment">
-                            <input type="text" id="comment_input" placeholder="입력" onkeypress="return enterKey(event);"/>
-                          </form>
-                      </div>
-                    </td>
-                    <td>
-                    </td>
+                                </div>
+                                <form>
+                                    <input type="text" id="comment_input" placeholder="입력" onkeypress="return enterKey(event);" />
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
 
-                  </tr>
+                    </tr>
                 </table>
 
             </div>
@@ -76,22 +75,41 @@
 </div>
 
 <script type='text/javascript'>
-/*
-  function enterKey(e)
-  {
-    if(e.keyCode == 13)
-    {
-      var cinput = document.getElementById("comment_input");
-      cinput.value="";
-      return false;
+    /*
+              function enterKey(e)
+              {
+                if(e.keyCode == 13)
+                {
+                  var cinput = document.getElementById("comment_input");
+                  cinput.value="";
+                  return false;
+                }
+                else {
+                  return true;
+                }
+              }*/
+    var imgs = ["grave_animalfarm", "grave_buddybuddy", "grave_cyworld", "grave_freechal", "grave_grandchase", "grave_metoday", "grave_o2jam", "grave_puppyred", "grave_qplay", "grave_yahoo"];;
+    var idxId;
+    var idx;
+
+    function loadComment() {
+        $.post("/loadcomment", {
+                index: idx
+            },
+            function(data) {
+                $('#comment_list').html("");
+                $.each(data, function(index, item) {
+                    //alert(item.comment);
+                    $('#comment_list').append(item.comment).append("<br />");
+                })
+
+                //alert(data.length+" "+data);
+                //        var parsedData = JSON.parse(data);
+
+                //      alert(parsedData);
+            }
+        );
     }
-    else {
-      return true;
-    }
-  }*/
-  var imgs = ["grave_animalfarm", "grave_buddybuddy", "grave_cyworld", "grave_freechal", "grave_grandchase", "grave_metoday", "grave_o2jam", "grave_puppyred", "grave_qplay", "grave_yahoo"];;
-  var idxId;
-  var idx;
     $(document).ready(function() {
         $(function() {
             $(".flower_icon").on("click", function() {
@@ -100,20 +118,26 @@
                 $('#comment_input').val("");
                 $('#grave_title').html(imgs[idx]);
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
-                //$('#imagemodal').modal('show');
 
                 $("#imagemodal").modal('show').css({
                     'margin-top': function() { //vertical centering
                         return -($(this).height() / 5);
                     },
                 });
+                loadComment();
             });
             $("#comment_input").keypress(function(e) {
-              if(e.keyCode == 13)
-              {
-                alert(idx);
-                $('#comment_input').val("");
-              }
+                if (e.keyCode == 13) {
+                    $.post("/newcomment", {
+                            comment: $('#comment_input').val(),
+                            index: idx
+                        },
+                        function(data) {
+                            $('#comment_input').val("");
+                            loadComment();
+                        });
+                    return false;
+                }
             });
 
         });
