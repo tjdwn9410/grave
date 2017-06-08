@@ -98,6 +98,7 @@
             },
             function(data) {
                 $('#comment_list').html("");
+                alert(window.outerWidth);
                 $.each(data, function(index, item) {
                     //alert(item.comment);
                     $('#comment_list').append(item.comment).append("<br />");
