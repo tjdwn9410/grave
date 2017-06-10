@@ -25,9 +25,10 @@ img#logo {
     margin-top: 100px;
     margin-bottom: 60px;
 }
-
 div#main_content {
-    text-align: center;
+  text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 div#line {
@@ -63,23 +64,34 @@ img.share_icon {
     height: 25px;
 }
 
+
 img#imagepreview {
     width: 300px;
-    height: 176px;
-    margin-top: 120px;
-    margin-bottom: 120px;
 }
 
 div.icon {
     text-align: right;
     margin-right: 10px;
 }
+.modal.modal-center {
+  text-align: center;
+}
 
-.modal-dialog.modal-fullsize {
-    width: 840px;
-    margin-top: 20%;
-    margin-bottom:20%;
-    padding: 0;
+.modal-dialog.modal-80size {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.modal-content.modal-80size {
+  height: auto;
+}
+
+
+.modal-body
+{
+  text-align: center;
+  padding: 0px;
 }
 
 .modal-header {
@@ -90,14 +102,11 @@ div.icon {
     border-top: none;
 }
 
-.modal-body {
-    text-align: center;
-}
 
 div#right_contents {
     font-family: 'BMJUA';
-    width: 450px;
-    height: 400px;
+    width: 100%;
+    text-align: center;
 }
 
 div#border_line {
@@ -107,27 +116,28 @@ div#border_line {
     margin: 30px;
 }
 
+
 table#comment_table {
     margin: auto;
 }
 
 div#grave_title_line {
-    margin-left: 100px;
-    width: 250px;
+    width: 100%;
     height: 20px;
     background-image: url('/images/dot_line.png');
     background-repeat: repeat-x;
 }
 
 div#comment_list {
-    margin-left: 65px;
-    width: 320px;
+    width: 100%;
     height: 280px;
     overflow:scroll;
     border: 1px solid;
     background-color: #EDEDED;
+    text-align: left;
+    padding: 5px;
 }
 
 input#comment_input {
-    width: 320px;
+    width: 100%;
 }

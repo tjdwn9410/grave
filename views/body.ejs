@@ -8,86 +8,50 @@
 </div>
 
 <div id="main_content">
-    <table id="graves" align="center">
-        <% var imgs = ["grave_animalfarm","grave_buddybuddy","grave_cyworld","grave_freechal","grave_grandchase","grave_metoday","grave_o2jam","grave_puppyred","grave_qplay","grave_yahoo"] %>
-            <% for(var i = 0 ; i < 4 ; i++) {%>
-                <tr id="g_rows<%= i %>">
-                    <% for(var j = 0 ; j < 3 ; j++) {%>
-                        <td id="g_cols<%= i %><%= j %>" width="280px" height="300px">
-                            <% if (imgs.length > i*3+j) {%>
-                                <img class="grave" id="<%=imgs[i*3+j] %>" src="./images/<%=imgs[i*3+j] %>.png" />
-                                <img class="grave_line" src="./images/dot_line.png" />
-                                <div class="icon">
-                                    <img class="flower_icon" id="flower_<%= i %>_<%= j %>" src="./images/icon_flower.png" />
-                                    <img class="comment_icon" id="comment_<%= i %>_<%= j %>" src="./images/icon_comment.png" />
-                                    <img class="share_icon" id="share_<%= i %>_<%= j %>" src="./images/icon_share.png" />
-                                </div <% } %>
-                        </td>
-                        <% } %>
-                </tr>
-                <% } %>
-    </table>
+    <% var imgs = ["grave_animalfarm","grave_buddybuddy","grave_cyworld","grave_freechal","grave_grandchase","grave_metoday","grave_o2jam","grave_puppyred","grave_qplay","grave_yahoo"] %>
+        <% for(var i = 0 ; i < 10 ; i++) { %>
+            <div style="width:251px; height: 200px; display: inline-block;">
+                <img class="grave" id="<%=imgs[i] %>" src="./images/<%=imgs[i] %>.png" />
+                <img class="grave_line" src="./images/dot_line.png" />
+                <div class="icon">
+                    <img class="flower_icon" id="flower_<%= i %>" src="./images/icon_flower.png" />
+                    <img class="comment_icon" id="comment_<%= i %>" src="./images/icon_comment.png" />
+                    <img class="share_icon" id="share_<%= i %>" src="./images/icon_share.png" />
+                </div>
+            </div>
+        <% } %>
 </div>
 
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullsize">
-        <div class="modal-content">
+<div class="modal modal-center fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-center modal-80size">
+        <div class="modal-content modal-80size">
             <div class="modal-body">
-                <table id="comment_table" color="RED" width="800px">
-                    <tr>
-                        <td colspan="3">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="" id="imagepreview">
-                        </td>
-                        <td>
-                            <div id="border_line">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
-                            </div>
-                        </td>
-                        <td>
-                            <div id="right_contents">
-                                <p id="grave_title">
-                                </p>
-                                <div id="grave_title_line">
-                                </div>
+                <div id="modalcontent_wrapper">
+                    <div id="imagepreview_wrapper">
+                        <img src="" id="imagepreview" />
+                    </div>
 
-                                <div id="comment_list">
+                    <div id="right_contents">
 
-                                </div>
-                                <form>
-                                    <input type="text" id="comment_input" placeholder="입력" onkeypress="return enterKey(event);" />
-                                </form>
-                            </div>
-                        </td>
-                        <td>
-                        </td>
+                        <div id="grave_title_line">
+                        </div>
 
-                    </tr>
-                </table>
+                        <div id="comment_list">
 
+                        </div>
+                        <form>
+                            <input type="text" id="comment_input" placeholder="입력" onkeypress="return enterKey(event);" />
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script type='text/javascript'>
-    /*
-              function enterKey(e)
-              {
-                if(e.keyCode == 13)
-                {
-                  var cinput = document.getElementById("comment_input");
-                  cinput.value="";
-                  return false;
-                }
-                else {
-                  return true;
-                }
-              }*/
     var imgs = ["grave_animalfarm", "grave_buddybuddy", "grave_cyworld", "grave_freechal", "grave_grandchase", "grave_metoday", "grave_o2jam", "grave_puppyred", "grave_qplay", "grave_yahoo"];;
     var idxId;
     var idx;
@@ -98,7 +62,7 @@
             },
             function(data) {
                 $('#comment_list').html("");
-                alert(window.outerWidth);
+                var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
                 $.each(data, function(index, item) {
                     //alert(item.comment);
                     $('#comment_list').append(item.comment).append("<br />");
@@ -114,17 +78,17 @@
     $(document).ready(function() {
         $(function() {
             $(".flower_icon").on("click", function() {
-                idxId = $(this).attr('id').split('_', 3);
-                idx = parseInt(idxId[1] * 3) + parseInt(idxId[2]);
+                idxId = $(this).attr('id').split('_', );
+                idx = parseInt(idxId[1]);
                 $('#comment_input').val("");
-                $('#grave_title').html(imgs[idx]);
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
-
-                $("#imagemodal").modal('show').css({
-                    'margin-top': function() { //vertical centering
-                        return -($(this).height() / 5);
-                    },
-                });
+                $("#imagemodal").modal('show');
+                //
+                // $("#imagemodal").modal('show').css({
+                //     'margin-top': function() { //vertical centering
+                //         return -($(this).height() /3);
+                //     }
+                // });
                 loadComment();
             });
             $("#comment_input").keypress(function(e) {
