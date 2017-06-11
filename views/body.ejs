@@ -83,7 +83,8 @@
                 $('#comment_input').val("");
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
                 $('.modal').removeClass('fade');
-                $("#imagemodal").modal('show');
+                $('#imagemodal').removeClass('fade');
+                $("#imagemodal").modal('show').css({});
                 //
                 // $("#imagemodal").modal('show').css({
                 //     'margin-top': function() { //vertical centering
