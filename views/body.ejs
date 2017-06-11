@@ -78,7 +78,7 @@
     $(document).ready(function() {
         $(function() {
             $(".comment_icon").on("click", function() {
-                idxId = $(this).attr('id').split('_', );
+                idxId = $(this).attr('id').split('_');
                 idx = parseInt(idxId[1]);
                 $('#comment_input').val("");
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
