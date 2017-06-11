@@ -22,7 +22,7 @@
             <% } %>
 </div>
 
-<div class="modal modal-center fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal modal-center" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-center modal-80size">
         <div class="modal-content modal-80size">
             <div class="modal-body">
@@ -82,11 +82,7 @@
                 idx = parseInt(idxId[1]);
                 $('#comment_input').val("");
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
-
-                var isIE = window.ActiveXObject || "ActiveXObject" in window;
-                if (isIE) {
-                    $('.modal').removeClass('fade');
-                }
+                $('.modal').removeClass('fade');
                 $("#imagemodal").modal('show');
                 //
                 // $("#imagemodal").modal('show').css({
