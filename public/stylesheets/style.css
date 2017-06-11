@@ -6,7 +6,7 @@ body {}
 
 @font-face {
     font-family: 'BMJUA';
-    src: url('/fonts/BMJUA_ttf.ttf') format('truetype');
+    src: url('/fonts/BMJUA_ttf.ttf');
 }
 
 div#head_content {
