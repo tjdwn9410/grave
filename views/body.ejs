@@ -93,6 +93,10 @@
                 // });
                 loadComment();
             });
+            $('#comment_input').on('touchstart', function() {
+                $(this).focus(); // inside this function the focus works
+                //focused = $(this); // to point to currently focused
+            });
             $("#comment_input").keypress(function(e) {
                 if (e.keyCode == 13) {
                     if ($('#comment_input').val() != "") {
