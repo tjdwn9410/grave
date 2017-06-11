@@ -19,14 +19,14 @@
                     <img class="share_icon" id="share_<%= i %>" src="./images/icon_share.png" />
                 </div>
             </div>
-        <% } %>
+            <% } %>
 </div>
 
 <div class="modal modal-center fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-center modal-80size">
         <div class="modal-content modal-80size">
             <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
                 <div id="modalcontent_wrapper">
                     <div id="imagepreview_wrapper">
@@ -57,31 +57,36 @@
     var idx;
 
     function loadComment() {
-        $.post("/loadcomment", {
-                index: idx
-            },
+        $.get("/loadcomment/" + idx, {},
             function(data) {
                 $('#comment_list').html("");
-                var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                var count = 0;
                 $.each(data, function(index, item) {
                     //alert(item.comment);
-                    $('#comment_list').append(item.comment).append("<br />");
-                })
-
-                //alert(data.length+" "+data);
-                //        var parsedData = JSON.parse(data);
-
-                //      alert(parsedData);
+                    var inTag = "<div style=\"height:35px; display:block; \" >" + item.comment + "</div>";
+                    $('#comment_list').
+                    append(inTag);
+                    count++;
+                });
+                //$('#comment_list').scrollTop(count*35);
+                $('#comment_list').animate({
+                    scrollTop: count * 35
+                });
             }
         );
     }
     $(document).ready(function() {
         $(function() {
-            $(".flower_icon").on("click", function() {
+            $(".comment_icon").on("click", function() {
                 idxId = $(this).attr('id').split('_', );
                 idx = parseInt(idxId[1]);
                 $('#comment_input').val("");
                 $('#imagepreview').attr('src', './images/' + imgs[idx] + ".png");
+
+                var isIE = window.ActiveXObject || "ActiveXObject" in window;
+                if (isIE) {
+                    $('.modal').removeClass('fade');
+                }
                 $("#imagemodal").modal('show');
                 //
                 // $("#imagemodal").modal('show').css({
@@ -93,15 +98,20 @@
             });
             $("#comment_input").keypress(function(e) {
                 if (e.keyCode == 13) {
-                    $.post("/newcomment", {
-                            comment: $('#comment_input').val(),
-                            index: idx
-                        },
-                        function(data) {
-                            $('#comment_input').val("");
-                            loadComment();
-                        });
-                    return false;
+                    if ($('#comment_input').val() != "") {
+                        $.post("/newcomment", {
+                                comment: $('#comment_input').val(),
+                                index: idx
+                            },
+                            function(data) {
+                                $('#comment_input').val("");
+                                loadComment();
+                            });
+                        return false;
+                    } else {
+                        alert("댓글을 입력해주세요 ^_^");
+                        return false;
+                    }
                 }
             });
 

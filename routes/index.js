@@ -35,9 +35,9 @@ router.post('/newcomment',function(req, res,next) {
   res.send(addcomment);
 });
 
-router.post('/loadcomment',function(req, res,next) {
+router.get('/loadcomment/:index',function(req, res,next) {
 
-  var idx = req.body.index;
+  var idx = req.params.index;
   commentModel.find({"index":idx},function(err,docs)
   {
     res.send(docs);
